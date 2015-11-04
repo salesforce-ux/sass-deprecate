@@ -8,4 +8,4 @@ Source code is licensed under [BSD License Clause 2](http://opensource.org/licen
 
 ## Acknowledgments
 
-Thanks to @HugoGiraudel for his `to-number` Sass function.
+Thanks to [Hugo Giraudel](https://github.com/HugoGiraudel) for his `to-number` Sass function.
