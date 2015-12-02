@@ -89,6 +89,8 @@ $app-version: '1.0.0' !default;
     @error 'The parameter passed to deprecate() must be a String. Good: deprecate(\'0.1.0\') / Bad: deprecate(0.1.0).';
   }
 
+  $throw-error: true;
+
   @if & {
     $parent: &;
     @warn '#{$parent} will be deprecated in #{$version}. Current version: #{$app-version}.';
@@ -99,17 +101,24 @@ $app-version: '1.0.0' !default;
 
   @if _d-version-major($version) > _d-version-major($app-version) {
     @content;
+    $throw-error: false;
   } @else {
     @if _d-version-major($version) == _d-version-major($app-version) {
       @if _d-version-minor($version) > _d-version-minor($app-version) {
         @content;
+        $throw-error: false;
       } @else {
         @if _d-version-minor($version) == _d-version-minor($app-version) {
           @if _d-version-patch($version) > _d-version-patch($app-version) {
             @content;
+            $throw-error: false;
           }
         }
       }
     }
+  }
+
+  @if $throw-error {
+    @error 'Deprecated code was found: please remove it to continue.';
   }
 }
