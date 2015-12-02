@@ -83,14 +83,18 @@ $app-version: '1.0.0' !default;
 ///
 /// @require $app-version
 /// @param {String} $version - Semver-like version (e.g. '0.200.0')
-@mixin deprecate($version) {
+/// @param {String} $message - Reason about why the code will be deprecated or possible workaround (e.g. 'Use .xxx instead')
+@mixin deprecate($version, $message: null) {
   @if type-of($version) != string {
     @error 'The parameter passed to deprecate() must be a String. Good: deprecate(\'0.1.0\') / Bad: deprecate(0.1.0).';
   }
 
   @if & {
     $parent: &;
-    @warn '#{$parent} deprecated in version #{$version}. Current version: #{$app-version}';
+    @warn '#{$parent} will be deprecated in #{$version}. Current version: #{$app-version}.';
+  }
+  @if $message {
+    @warn $message;
   }
 
   @if _d-version-major($version) > _d-version-major($app-version) {
