@@ -1,0 +1,21 @@
+{
+  "name": "sass-deprecate",
+  "version": "1.0.0",
+  "description": "Sass Deprecate",
+  "license": "SEE LICENSE IN README.md",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:salesforce-ux/sass-deprecate.git"
+  },
+  "author": "Salesforce and contributors",
+  "scripts": {
+    "test": "./test/travis.rb"
+  },
+  "files": [
+    "index.scss",
+    "README.md"
+  ],
+  "devDependencies": {
+    "node-sass": "^3.4.2"
+  }
+}
