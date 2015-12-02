@@ -22,12 +22,12 @@ $app-version: '1.0.0' !default;
   $result: 0;
   $digits: 0;
   $numbers: ('0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9);
-  
+
   @for $i from 1 through str-length($value) {
     $character: str-slice($value, $i, $i);
 
     @if $digits == 0 {
-      $result: $result * 10 + map-get($numbers, $character);  
+      $result: $result * 10 + map-get($numbers, $character);
     } @else {
       $digits: $digits * 10;
       $result: $result + map-get($numbers, $character) / $digits;
