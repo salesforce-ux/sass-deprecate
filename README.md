@@ -4,11 +4,15 @@
 
 How? Sass Deprecate warns about the pieces of your codebase that are deprecated, instructing developers where to clean up. It helps provide a clear upgrade path for framework and library users.
 
+We (the Salesforce UX team) built this tool to help us deprecate code with confidence in the [Lightning Design System](https://www.lightningdesignsystem.com).
+
 ## Getting started
 
-Typical workflow:
+Here is a typical workflow in which `deprecate()` comes in handy:
 
 ### v1.0.0
+
+Consider a Sass style guide in v1.0.0,  button:
 
 ```scss
 $app-version: '1.0.0';
@@ -79,7 +83,6 @@ Sass Deprecate's API is documented using [SassDoc](http://sassdoc.com/).
 Generate & deploy the documentation to <http://sass-mq.github.io/sass-mq/>:
 
     npm run deploy-doc
-
 
 ## License
 

@@ -2,7 +2,7 @@
 # Encoding: utf-8
 # Inspired by http://www.skorks.com/2011/02/a-unit-testing-framework-in-44-lines-of-ruby/
 
-# Copyright (c) 2015, salesforce.com, inc. All rights reserved.
+# Copyright (c) 2015-2016, salesforce.com, inc. All rights reserved.
 
 # Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 # Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
