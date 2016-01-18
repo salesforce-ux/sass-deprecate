@@ -69,9 +69,11 @@ And the compiled CSS won't include `.button`:
 
 ## Running tests
 
+Clone the repository, then:
+
 ```
-$ npm install
-$ npm test
+npm install
+npm test
 ```
 
 ## Generating the documentation
@@ -80,7 +82,7 @@ Sass Deprecate's API is documented using [SassDoc](http://sassdoc.com/).
 
     npm run generate-doc
 
-Generate & deploy the documentation to <http://sass-mq.github.io/sass-mq/>:
+Generate & deploy the documentation to <http://salesforce-ux.github.io/sass-deprecate/>:
 
     npm run deploy-doc
 
