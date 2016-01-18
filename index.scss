@@ -12,23 +12,23 @@
 $app-version: '1.0.0' !default;
 
 /// Mode:
-/// - disabled: output all code, even if deprecated
-/// - silent: disable all warnings but don't output deprecated code
-/// - verbose: show all warnings, even for code that is *about* to be deprecated
-/// - sensible (default): output warnings when deprecated code is detected
-/// - fail: prevent compilation when deprecated code is found
+/// - `disabled`: output all code, even if deprecated
+/// - `silent`: disable all warnings but don't output deprecated code
+/// - `verbose`: show all warnings, even for code that is *about* to be deprecated
+/// - `sensible` (default): output warnings when deprecated code is detected
+/// - `fail`: prevent compilation when deprecated code is found
 ///
 /// @type String
 $deprecate-mode: 'sensible' !default;
 
-/// Casts a string into a number (integer only)
-///
-/// @param {String} $value - Value to be parsed
-///
-/// @return {Number}
-/// @author @HugoGiraudel - Simplified by @kaelig to only convert unsigned integers
-/// @url http://hugogiraudel.com/2014/01/15/sass-string-to-number/
-/// @access private
+// Casts a string into a number (integer only)
+//
+// @param {String} $value - Value to be parsed
+//
+// @return {Number}
+// @author @HugoGiraudel - Simplified by @kaelig to only convert unsigned integers
+// @link http://hugogiraudel.com/2014/01/15/sass-string-to-number/
+// @access private
 @function _d-to-number($value) {
   $result: 0;
   $digits: 0;
@@ -48,42 +48,42 @@ $deprecate-mode: 'sensible' !default;
   @return $result;
 }
 
-/// Major revision of a version
-///
-/// @param {String} $version - Semver version (e.g. '1.0.0')
-/// @return {Number} Major revision
-///
-/// @example scss
-///  _d-version-major('1.0.0') // 1
-///
-/// @access private
+// Major revision of a version
+//
+// @param {String} $version - Semver version (e.g. '1.0.0')
+// @return {Number} Major revision
+//
+// @example scss
+//  _d-version-major('1.0.0') // 1
+//
+// @access private
 @function _d-version-major($version) {
   @return _d-to-number(str-slice($version, 0, str-index($version, '.') - 1));
 }
 
-/// Minor revision of a version
-///
-/// @param {String} $version - Semver version (e.g. '1.50.0')
-/// @return {Number} Minor revision
-///
-/// @example scss
-///  _d-version-minor('1.50.0') // 50
-///
-/// @access private
+// Minor revision of a version
+//
+// @param {String} $version - Semver version (e.g. '1.50.0')
+// @return {Number} Minor revision
+//
+// @example scss
+//  _d-version-minor('1.50.0') // 50
+//
+// @access private
 @function _d-version-minor($version) {
   $minor-patch: str-slice($version, str-index($version, '.') + 1, str-length($version));
   @return _d-to-number(str-slice($minor-patch, 0, str-index($minor-patch, '.') - 1));
 }
 
-/// Patch revision of a version
-///
-/// @param {String} $version - Semver version (e.g. '1.50.25')
-/// @return {Number} Patch revision
-///
-/// @example scss
-///  _d-version-patch('1.50.25') // 25
-///
-/// @access private
+// Patch revision of a version
+//
+// @param {String} $version - Semver version (e.g. '1.50.25')
+// @return {Number} Patch revision
+//
+// @example scss
+//  _d-version-patch('1.50.25') // 25
+//
+// @access private
 @function _d-version-patch($version) {
   $minor-patch: str-slice($version, str-index($version, '.') + 1, str-length($version));
   @return _d-to-number(str-slice($minor-patch, str-index($minor-patch, '.') + 1, str-length($minor-patch)));
@@ -93,8 +93,9 @@ $deprecate-mode: 'sensible' !default;
 /// and signal its deprecation to developers
 ///
 /// @require $app-version
-/// @param {String} $version - Semver-like version (e.g. '0.200.0')
-/// @param {String} $message - Reason about why the code will be deprecated or possible workaround (e.g. 'Use .xxx instead')
+/// @require $deprecate-mode
+/// @param {String} $version - Semver-like version (e.g. '2.0.0')
+/// @param {String} $message - Reason about why the code will be deprecated or possible workaround (e.g. 'Use .new-thing instead')
 @mixin deprecate($version, $message: null) {
   @if (type-of($version) != 'string') {
     @error 'The parameter passed to deprecate() must be a String. Good: deprecate(\'0.1.0\') / Bad: deprecate(0.1.0).';
