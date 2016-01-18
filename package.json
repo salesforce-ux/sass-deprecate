@@ -9,11 +9,16 @@
   },
   "author": "Salesforce and contributors",
   "scripts": {
-    "test": "./test/travis.rb"
+    "test": "./test/spec.rb"
   },
   "files": [
     "index.scss",
     "README.md"
+  ],
+  "ignore": [
+    ".travis.yml",
+    ".gitignore",
+    "test"
   ],
   "devDependencies": {
     "node-sass": "^3.4.2"

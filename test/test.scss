@@ -7,25 +7,54 @@
 
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+$app-version: '10.0.0';
+
 @import '../index';
 
-.deprecate-in-next-patch {
-  @include deprecate('1.0.1') {
+.deprecated {
+  @include deprecate('0.0.1') {
     content: 'Deprecated code.';
+  }
+}
+@include deprecate('0.0.1', 'Because reasons.') {
+  .deprecated-with-reason {
+    content: 'Deprecated code.';
+    content: 'Selector is nested inside the mixin.';
+  }
+}
+.deprecate-in-next-patch {
+  @include deprecate('10.0.1') {
+    content: 'Code will be deprecated in the next patch.';
   }
 }
 .deprecate-in-next-minor-version {
-  @include deprecate('1.1.0') {
-    content: 'Deprecated code.';
+  @include deprecate('10.1.0') {
+    content: 'Code will be deprecated in the next minor update.';
   }
 }
 .deprecate-in-next-major-version {
-  @include deprecate('2.0.0') {
-    content: 'Deprecated code.';
+  @include deprecate('11.0.0') {
+    content: 'Code will be deprecated in the next major update.';
   }
 }
-.deprecate-with-reason {
-  @include deprecate('2.0.0', 'That\'s the reason.') {
-    content: 'Deprecated code.';
+
+$deprecate-mode: 'disabled';
+.test-disabled-mode {
+  @include deprecate('0.0.2') {
+    content: 'Code is deprecated but should be in the output.';
   }
 }
+$deprecate-mode: 'verbose';
+.deprecate-verbose {
+  @include deprecate('12.0.0') {
+    content: 'Code will be deprecated in the next major update.';
+  }
+}
+
+@include deprecate('12.0.0') {
+  .deprecate-nested-with-reason {
+    content: 'Code will be deprecated in the next major update.';
+    content: 'Selector is nested inside the mixin.';
+  }
+}
+$deprecate-mode: 'sensible';

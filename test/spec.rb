@@ -14,47 +14,69 @@ require_relative 'test-framework'
 require 'fileutils'
 
 describe "Compiling files containing deprecated code" do
-  stdout, stderr, status = Open3.capture3 "node-sass test/error.scss test/error.css"
-  puts "Running node-sass test/error.scss test/error.css"
+  stdout, stderr, status = Open3.capture3 "node-sass test/fail.scss test/fail.css"
+  puts "Running node-sass test/fail.scss test/fail.css"
 
-  it "should fail to compile" do
+  it "should fail to compile if mode is set to fail" do
     not status.success? and
-    not File.exist? 'test/error.css'
+    not File.exist? 'test/fail.css'
   end
   it "should throw a useful error message" do
-    find "Deprecated code was found: please remove it to continue.", stderr
+    # When compiling fail.scss
+    find "Deprecated code was found. Remove it to continue.", stderr and
+    # Warn but don't fail compilation of test.scss
+    find "Deprecated code was found, it should be removed before its release.", $errors
+  end
+  it "should not output deprecated code" do
+    not find ".deprecated"
   end
 end
 
 describe "Signaling deprecated code for a future patch" do
-  it "output the deprecated code" do
+  it "output the code" do
     find ".deprecate-in-next-patch{content"
   end
-  it "should throw warnings" do
-    find ".deprecate-in-next-patch will be deprecated in 1.0.1. Current version: 1.0.0.", $errors
+  it "should not throw any warnings" do
+    not find "10.0.1", $errors
   end
 end
 
 describe "Signaling deprecated code for a future major version" do
-  it "output the deprecated code" do
+  it "output the code" do
     find ".deprecate-in-next-minor-version{content"
   end
-  it "should throw warnings" do
-    find ".deprecate-in-next-minor-version will be deprecated in 1.1.0. Current version: 1.0.0.", $errors
+  it "should not throw any warnings" do
+    not find "10.1.0", $errors
   end
 end
 
 describe "Signaling deprecated code for a future major version" do
-  it "output the deprecated code" do
+  it "output the code" do
     find ".deprecate-in-next-major-version{content"
   end
-  it "should throw warnings" do
-    find ".deprecate-in-next-major-version will be deprecated in 2.0.0. Current version: 1.0.0.", $errors
+  it "should not throw any warnings" do
+    not find "11.0.0", $errors
   end
 end
 
 describe "Giving a reason for deprecation" do
   it "should surface the reason in console warnings" do
-    find "That's the reason.", $errors
+    find "Because reasons", $errors
+  end
+end
+
+describe "Disabling the plugin" do
+  it "should output deprecated code regardless" do
+    find ".test-disabled-mode"
+  end
+  it "should not throw any warnings" do
+    not find ".test-disabled-mode", $errors
+  end
+end
+
+describe "Activating verbose mode" do
+  it "should surface more information in console warnings" do
+    find ".deprecate-verbose will be deprecated in 12.0.0. Current version: 10.0.0.", $errors and
+    find "Some code will be deprecated in 12.0.0. Current version: 10.0.0.", $errors
   end
 end
