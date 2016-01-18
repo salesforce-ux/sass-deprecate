@@ -9,18 +9,21 @@
   },
   "author": "Salesforce and contributors",
   "scripts": {
-    "test": "./test/spec.rb"
+    "test": "./test/spec.rb",
+    "generate-docs": "./sassdoc.sh"
   },
   "files": [
     "index.scss",
     "README.md"
   ],
   "ignore": [
-    ".travis.yml",
-    ".gitignore",
-    "test"
+    "test",
+    "sassdoc",
+    "**/.*",
+    "sassdoc.sh"
   ],
   "devDependencies": {
-    "node-sass": "^3.4.2"
+    "node-sass": "^3.4.2",
+    "sassdoc": "^2.1.19"
   }
 }

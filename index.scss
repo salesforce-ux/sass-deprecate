@@ -27,7 +27,7 @@ $deprecate-mode: 'sensible' !default;
 ///
 /// @return {Number}
 /// @author @HugoGiraudel - Simplified by @kaelig to only convert unsigned integers
-/// @see http://hugogiraudel.com/2014/01/15/sass-string-to-number/
+/// @url http://hugogiraudel.com/2014/01/15/sass-string-to-number/
 /// @access private
 @function _d-to-number($value) {
   $result: 0;
