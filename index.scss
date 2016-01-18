@@ -22,12 +22,12 @@ $app-version: '1.0.0' !default;
   $result: 0;
   $digits: 0;
   $numbers: ('0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9);
-  
+
   @for $i from 1 through str-length($value) {
     $character: str-slice($value, $i, $i);
 
     @if $digits == 0 {
-      $result: $result * 10 + map-get($numbers, $character);  
+      $result: $result * 10 + map-get($numbers, $character);
     } @else {
       $digits: $digits * 10;
       $result: $result + map-get($numbers, $character) / $digits;
@@ -83,29 +83,42 @@ $app-version: '1.0.0' !default;
 ///
 /// @require $app-version
 /// @param {String} $version - Semver-like version (e.g. '0.200.0')
-@mixin deprecate($version) {
+/// @param {String} $message - Reason about why the code will be deprecated or possible workaround (e.g. 'Use .xxx instead')
+@mixin deprecate($version, $message: null) {
   @if type-of($version) != string {
     @error 'The parameter passed to deprecate() must be a String. Good: deprecate(\'0.1.0\') / Bad: deprecate(0.1.0).';
   }
 
+  $throw-error: true;
+
   @if & {
     $parent: &;
-    @warn '#{$parent} deprecated in version #{$version}. Current version: #{$app-version}';
+    @warn '#{$parent} will be deprecated in #{$version}. Current version: #{$app-version}.';
+  }
+  @if $message {
+    @warn $message;
   }
 
   @if _d-version-major($version) > _d-version-major($app-version) {
     @content;
+    $throw-error: false;
   } @else {
     @if _d-version-major($version) == _d-version-major($app-version) {
       @if _d-version-minor($version) > _d-version-minor($app-version) {
         @content;
+        $throw-error: false;
       } @else {
         @if _d-version-minor($version) == _d-version-minor($app-version) {
           @if _d-version-patch($version) > _d-version-patch($app-version) {
             @content;
+            $throw-error: false;
           }
         }
       }
     }
+  }
+
+  @if $throw-error {
+    @error 'Deprecated code was found: please remove it to continue.';
   }
 }
