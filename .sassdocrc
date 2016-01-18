@@ -1,0 +1,9 @@
+{
+  "package": {
+    "title": "Sass Deprecate",
+    "name": "sass-deprecate",
+    "homepage": "https://github.com/salesforce-ux/sass-deprecate",
+    "description": "deprecate() is a Sass mixin that helps managing code deprecation."
+  },
+  "autofill": "false"
+}
