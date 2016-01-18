@@ -63,6 +63,24 @@ And the compiled CSS won't include `.button`:
 .button-new { background: red; border: 3px solid blue; }
 ```
 
+## Running tests
+
+```
+$ npm install
+$ npm test
+```
+
+## Generating the documentation
+
+Sass Deprecate's API is documented using [SassDoc](http://sassdoc.com/).
+
+    npm run generate-doc
+
+Generate & deploy the documentation to <http://sass-mq.github.io/sass-mq/>:
+
+    npm run deploy-doc
+
+
 ## License
 
 Source code is licensed under [BSD License Clause 2](http://opensource.org/licenses/BSD-2-Clause).

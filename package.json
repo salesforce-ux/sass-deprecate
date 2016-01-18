@@ -10,7 +10,8 @@
   "author": "Salesforce and contributors",
   "scripts": {
     "test": "./test/spec.rb",
-    "generate-docs": "./sassdoc.sh"
+    "generate-doc": "./node_modules/.bin/sassdoc index.scss sassdoc --config=.sassdocrc && echo 'Documentation successfully generated in sassdoc/index.html'",
+    "deploy-doc": "git add sassdoc && git commit -m 'Compile SassDoc' && git subtree push --prefix sassdoc origin gh-pages && echo 'Documentation successfully deployed to https://salesforce-ux.github.io/sass-deprecate/'"
   },
   "files": [
     "index.scss",
