@@ -16,7 +16,7 @@ Run tests everytime a file changes:
 
 ```bash
 $ gem install filewatcher
-$ filewatcher '**/*.{scss,rb}' 'test/travis.rb' --dontwait
+$ filewatcher '**/*.{scss,rb}' 'test/spec.rb' --dontwait
 ```
 
 When tests fail, the CSS gets output in `test/error.css`.
