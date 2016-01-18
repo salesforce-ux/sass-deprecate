@@ -11,8 +11,10 @@
 /// @type String
 $app-version: '1.0.0' !default;
 
-/// Mode:
-/// - `disabled`: output all code, even if deprecated
+/// Deprecation mode
+///
+/// ### Available modes:
+/// - `disabled`: output all the code, even if deprecated
 /// - `silent`: disable all warnings but don't output deprecated code
 /// - `verbose`: show all warnings, even for code that is *about* to be deprecated
 /// - `sensible` (default): output warnings when deprecated code is detected
