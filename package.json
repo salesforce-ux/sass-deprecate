@@ -23,6 +23,9 @@
     "**/.*",
     "sassdoc.sh"
   ],
+  "dependencies": {
+    "sass-semver": "^1.0.0"
+  },
   "devDependencies": {
     "node-sass": "^3.4.2",
     "sassdoc": "^2.1.19"
