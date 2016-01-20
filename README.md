@@ -1,4 +1,4 @@
-# Deprecate with confidence [![Build Status](https://travis-ci.com/salesforce-ux/sass-deprecate.svg?token=1gDsJEsp8ELpc6yY2BCC&branch=master)](https://travis-ci.com/salesforce-ux/sass-deprecate)
+# Deprecate with confidence [![Build Status](https://travis-ci.org/salesforce-ux/sass-deprecate.svg?branch=master)](https://travis-ci.org/salesforce-ux/sass-deprecate)
 
 `deprecate()` is a Sass mixin that helps managing code deprecation.
 
