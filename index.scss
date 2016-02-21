@@ -121,19 +121,30 @@ $deprecate-mode: 'sensible' !default;
       }
 
       // Define if the code is actually deprecated
-      @if (_d-version-major($version) > _d-version-major($app-version)) {
-        @content;
-        $deprecation-found: false;
+      @if (function-exists('deprecate-version-greater-than')) {
+        // A custom version comparison engine was found:
+        // rely on it to check if $version is greater than $app-version,
+        @if (deprecate-version-greater-than($version, $app-version)) {
+          @content;
+          $deprecation-found: false;
+        }
       } @else {
-        @if (_d-version-major($version) == _d-version-major($app-version)) {
-          @if (_d-version-minor($version) > _d-version-minor($app-version)) {
-            @content;
-            $deprecation-found: false;
-          } @else {
-            @if (_d-version-minor($version) == _d-version-minor($app-version)) {
-              @if (_d-version-patch($version) > _d-version-patch($app-version)) {
-                @content;
-                $deprecation-found: false;
+        // No custom version comparison engine was found:
+        // fall back to simple version comparison tests.
+        @if (_d-version-major($version) > _d-version-major($app-version)) {
+          @content;
+          $deprecation-found: false;
+        } @else {
+          @if (_d-version-major($version) == _d-version-major($app-version)) {
+            @if (_d-version-minor($version) > _d-version-minor($app-version)) {
+              @content;
+              $deprecation-found: false;
+            } @else {
+              @if (_d-version-minor($version) == _d-version-minor($app-version)) {
+                @if (_d-version-patch($version) > _d-version-patch($app-version)) {
+                  @content;
+                  $deprecation-found: false;
+                }
               }
             }
           }
