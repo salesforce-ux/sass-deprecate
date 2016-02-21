@@ -81,7 +81,7 @@ For advanced SemVer support in the form of `Major.Minor.Patch-beta/alpha/rc.1`, 
 @import 'node_modules/sass-semver/index';
 
 @function deprecate-version-greater-than($version, $app-version) {
-  @return call(gt, $v1: $version, $v2: $app-version);
+  @return gt($v1: $version, $v2: $app-version);
 }
 
 @import 'path-to/sass-deprecate/index';
