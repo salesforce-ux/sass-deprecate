@@ -52,7 +52,7 @@ $deprecate-mode: 'sensible' !default;
 
 // Major revision of a version
 //
-// @param {String} $version - Semver version (e.g. '1.0.0')
+// @param {String} $version - SemVer version (e.g. '1.0.0')
 // @return {Number} Major revision
 //
 // @example scss
@@ -65,7 +65,7 @@ $deprecate-mode: 'sensible' !default;
 
 // Minor revision of a version
 //
-// @param {String} $version - Semver version (e.g. '1.50.0')
+// @param {String} $version - SemVer version (e.g. '1.50.0')
 // @return {Number} Minor revision
 //
 // @example scss
@@ -79,7 +79,7 @@ $deprecate-mode: 'sensible' !default;
 
 // Patch revision of a version
 //
-// @param {String} $version - Semver version (e.g. '1.50.25')
+// @param {String} $version - SemVer version (e.g. '1.50.25')
 // @return {Number} Patch revision
 //
 // @example scss
@@ -96,7 +96,7 @@ $deprecate-mode: 'sensible' !default;
 ///
 /// @require $app-version
 /// @require $deprecate-mode
-/// @param {String} $version - Semver-like version (e.g. '2.0.0')
+/// @param {String} $version - SemVer-like version (e.g. '2.0.0')
 /// @param {String} $message - Reason about why the code will be deprecated or possible workaround (e.g. 'Use .new-thing instead')
 @mixin deprecate($version, $message: null) {
   @if (type-of($version) != 'string') {
@@ -121,19 +121,30 @@ $deprecate-mode: 'sensible' !default;
       }
 
       // Define if the code is actually deprecated
-      @if (_d-version-major($version) > _d-version-major($app-version)) {
-        @content;
-        $deprecation-found: false;
+      @if (function-exists('deprecate-version-greater-than')) {
+        // A custom version comparison engine was found:
+        // rely on it to check if $version is greater than $app-version,
+        @if (deprecate-version-greater-than($version, $app-version)) {
+          @content;
+          $deprecation-found: false;
+        }
       } @else {
-        @if (_d-version-major($version) == _d-version-major($app-version)) {
-          @if (_d-version-minor($version) > _d-version-minor($app-version)) {
-            @content;
-            $deprecation-found: false;
-          } @else {
-            @if (_d-version-minor($version) == _d-version-minor($app-version)) {
-              @if (_d-version-patch($version) > _d-version-patch($app-version)) {
-                @content;
-                $deprecation-found: false;
+        // No custom version comparison engine was found:
+        // fall back to simple version comparison tests.
+        @if (_d-version-major($version) > _d-version-major($app-version)) {
+          @content;
+          $deprecation-found: false;
+        } @else {
+          @if (_d-version-major($version) == _d-version-major($app-version)) {
+            @if (_d-version-minor($version) > _d-version-minor($app-version)) {
+              @content;
+              $deprecation-found: false;
+            } @else {
+              @if (_d-version-minor($version) == _d-version-minor($app-version)) {
+                @if (_d-version-patch($version) > _d-version-patch($app-version)) {
+                  @content;
+                  $deprecation-found: false;
+                }
               }
             }
           }
