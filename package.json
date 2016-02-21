@@ -1,7 +1,11 @@
 {
   "name": "sass-deprecate",
   "version": "1.0.3",
-  "description": "Sass Deprecate",
+  "description": "Sass Deprecate: deprecate with confidence",
+  "keywords": [
+    "sass",
+    "eyeglass-module"
+  ],
   "license": "SEE LICENSE IN README.md",
   "repository": {
     "type": "git",
@@ -17,12 +21,18 @@
     "index.scss",
     "README.md"
   ],
+  "main": "index.scss",
   "ignore": [
     "test",
     "sassdoc",
     "**/.*",
     "sassdoc.sh"
   ],
+  "eyeglass": {
+    "needs": "^0.8.2",
+    "sassDir": "./index.scss",
+    "exports": false
+  },
   "devDependencies": {
     "node-sass": "^3.4.2",
     "sassdoc": "^2.1.19"
