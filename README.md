@@ -26,7 +26,7 @@ $app-version: '1.0.0';
 We're introducing a new type of button, but we want to keep the old one in for backwards compatibility.
 
 ```scss
-$app-version: '1.0.0';
+$app-version: '1.1.0';
 @import 'path/to/deprecate/index.scss';
 
 @include deprecate('2.0.0', 'Use .button-new instead') {
