@@ -102,7 +102,7 @@ Sass Deprecate's API is documented using [SassDoc](http://sassdoc.com/).
 
     npm run generate-doc
 
-Generate & deploy the documentation to <http://salesforce-ux.github.io/sass-deprecate/>:
+Generate & deploy the documentation to <https://salesforce-ux.github.io/sass-deprecate/>:
 
     npm run deploy-doc
 
