@@ -13,6 +13,20 @@
 require_relative 'test-framework'
 require 'fileutils'
 
+describe "Compiling files with syntax errors" do
+  stdout, stderr, status = Open3.capture3 "node-sass test/wrong-parameter-type.scss test/wrong-parameter-type.css"
+  puts "Running node-sass test/wrong-parameter-type.scss test/wrong-parameter-type.css"
+
+  it "should fail to compile if the parameter is not a string" do
+    not status.success? and
+    not File.exist? 'test/wrong-parameter-type.css'
+  end
+
+  it "should throw a useful error message" do
+    find "The parameter passed to deprecate() must be a String.", stderr
+  end
+end
+
 describe "Compiling files containing deprecated code" do
   stdout, stderr, status = Open3.capture3 "node-sass test/fail.scss test/fail.css"
   puts "Running node-sass test/fail.scss test/fail.css"
