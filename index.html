@@ -1,0 +1,54 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Sass Deprecate</title><link rel="stylesheet" href="assets/css/main.css"><link href="http://fonts.googleapis.com/css?family=Open+Sans:400,500,700" rel="stylesheet" type="text/css"><meta name="viewport" content="width=device-width"><meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible"><!-- Open Graph tags --><meta property="og:title" content="Sass Deprecate - SassDoc"><meta property="og:type" content="website"><meta property="og:description" content="<p>deprecate() is a Sass mixin that helps managing code deprecation.</p>
+"><!-- Thanks to Sass-lang.com for the icons --><link href="assets/images/favicon.png" rel="shortcut icon"></head><body><aside class="sidebar" role="nav"><div class="sidebar__header"><h1 class="sidebar__title"><a href="https://github.com/salesforce-ux/sass-deprecate">Sass Deprecate</a></h1></div><div class="sidebar__body"><button type="button" class="btn-toggle js-btn-toggle" data-alt="Open all">Close all</button><p class="sidebar__item sidebar__item--heading" data-slug="undefined"><a href="#undefined">General</a></p><div><p class="sidebar__item sidebar__item--sub-heading" data-slug="undefined-variable"><a href="#undefined-variable">variables</a></p><ul class="list-unstyled"><li class="sidebar__item sassdoc__item" data-name="app-version" data-type="variable"><a href="#undefined-variable-app-version">app-version</a></li><li class="sidebar__item sassdoc__item" data-name="deprecate-mode" data-type="variable"><a href="#undefined-variable-deprecate-mode">deprecate-mode</a></li></ul><p class="sidebar__item sidebar__item--sub-heading" data-slug="undefined-mixin"><a href="#undefined-mixin">mixins</a></p><ul class="list-unstyled"><li class="sidebar__item sassdoc__item" data-name="deprecate" data-type="mixin"><a href="#undefined-mixin-deprecate">deprecate</a></li></ul></div></div></aside><article class="main" role="main"><header class="header" role="banner"><div class="container"><div class="sassdoc__searchbar searchbar"><label for="js-search-input" class="visually-hidden">Search</label><div class="searchbar__form" id="js-search"><input name="search" type="search" class="searchbar__field" autocomplete="off" autofocus id="js-search-input" placeholder="Search"><ul class="searchbar__suggestions" id="js-search-suggestions"></ul></div></div></div></header><section class="main__section"><h1 class="main__heading" id="undefined"><div class="container">General</div></h1><section class="main__sub-section" id="undefined-variable"><h2 class="main__heading--secondary"><div class="container">variables</div></h2><section class="main__item container item" id="undefined-variable-app-version"><h3 class="item__heading"><a class="item__name" href="#variable-app-version">app-version</a></h3><div class="item__code-wrapper"><pre class="item__code language-scss"><code>$app-version: &#39;1.0.0&#39; !default;</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Application version</p></div><h3 class="item__sub-heading">Type</h3><p><code>String</code></p><h3 class="item__sub-heading">Used by</h3><ul class="list-unstyled"><li><span class="item__cross-type">[mixin]</span> <a href="#mixin-deprecate"><code>deprecate</code></a></li></ul></section><section class="main__item container item" id="undefined-variable-deprecate-mode"><h3 class="item__heading"><a class="item__name" href="#variable-deprecate-mode">deprecate-mode</a></h3><div class="item__code-wrapper"><pre class="item__code language-scss"><code>$deprecate-mode: &#39;sensible&#39; !default;</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Deprecation mode</p><h3 id="available-modes-">Available modes:</h3><ul><li><code>disabled</code>: output all the code, even if deprecated</li><li><code>silent</code>: disable all warnings but don&#39;t output deprecated code</li><li><code>verbose</code>: show all warnings, even for code that is <em>about</em> to be deprecated</li><li><code>sensible</code> (default): output warnings when deprecated code is detected</li><li><code>fail</code>: prevent compilation when deprecated code is found</li></ul></div><h3 class="item__sub-heading">Type</h3><p><code>String</code></p><h3 class="item__sub-heading">Used by</h3><ul class="list-unstyled"><li><span class="item__cross-type">[mixin]</span> <a href="#mixin-deprecate"><code>deprecate</code></a></li></ul></section></section><section class="main__sub-section" id="undefined-mixin"><h2 class="main__heading--secondary"><div class="container">mixins</div></h2><section class="main__item container item" id="undefined-mixin-deprecate"><h3 class="item__heading"><a class="item__name" href="#mixin-deprecate">deprecate</a></h3><div class="item__code-wrapper"><pre class="item__code item__code--togglable language-scss" data-current-state="collapsed" data-expanded="@mixin deprecate($version, $message) { 
+  @if (type-of($version) != &#39;string&#39;) {
+    @error &#39;The parameter passed to deprecate() must be a String. Good: deprecate(\&#39;0.1.0\&#39;) / Bad: deprecate(0.1.0).&#39;;
+  }
+
+  // Plugin is disabled. Output anyway.
+  @if (&#39;disabled&#39; == $deprecate-mode) {
+    @content;
+  } @else {
+    @if not (&#39;silent&#39; == $deprecate-mode) {
+      // Assume we found code that is (or is about to be) deprecated
+      $deprecation-found: true;
+
+      @if (&#39;verbose&#39; == $deprecate-mode) {
+        @if (&amp;) {
+          $parent: &amp;;
+          @warn &#39;#{$parent} will be deprecated in #{$version}. Current version: #{$app-version}.&#39;;
+        } @else {
+          @warn &#39;Some code will be deprecated in #{$version}. Current version: #{$app-version}.&#39;;
+        }
+      }
+
+      // Define if the code is actually deprecated
+      @if (_d-version-major($version) &gt; _d-version-major($app-version)) {
+        @content;
+        $deprecation-found: false;
+      } @else {
+        @if (_d-version-major($version) == _d-version-major($app-version)) {
+          @if (_d-version-minor($version) &gt; _d-version-minor($app-version)) {
+            @content;
+            $deprecation-found: false;
+          } @else {
+            @if (_d-version-minor($version) == _d-version-minor($app-version)) {
+              @if (_d-version-patch($version) &gt; _d-version-patch($app-version)) {
+                @content;
+                $deprecation-found: false;
+              }
+            }
+          }
+        }
+      }
+
+      @if ($deprecation-found) {
+        $message: if($message, &#39;\AREASON:  #{$message}&#39;, &#39;&#39;);
+        @if (&#39;fail&#39; == $deprecate-mode) {
+          @error &#39;Deprecated code was found. Remove it to continue.#{$message}&#39;;
+        } @else {
+          @warn &#39;Deprecated code was found, it should be removed before its release.#{$message}&#39;;
+        }
+      }
+    }
+  }
+ }" data-collapsed="@mixin deprecate($version, $message) { ... }"><code>@mixin deprecate($version, $message) { ... }</code></pre></div><h3 class="item__sub-heading">Description</h3><div class="item__description"><p>Output code only until $app-version reaches $version and signal its deprecation to developers</p></div><h3 class="item__sub-heading">Parameters</h3><table class="item__parameters"><thead><tr><th scope="col"><span class="visually-hidden">parameter</span>Name</th><th scope="col"><span class="visually-hidden">parameter</span>Description</th><th scope="col"><span class="visually-hidden">parameter</span>Type</th><th scope="col"><span class="visually-hidden">parameter</span>Default value</th></tr></thead><tbody><tr class="item__parameter"><th scope="row" data-label="name"><code>$version</code></th><td data-label="desc"><p>Semver-like version (e.g. &#39;2.0.0&#39;)</p></td><td data-label="type"><code>String</code></td><td data-label="default">&mdash;<span class="visually-hidden">none</span></td></tr><tr class="item__parameter"><th scope="row" data-label="name"><code>$message</code></th><td data-label="desc"><p>Reason about why the code will be deprecated or possible workaround (e.g. &#39;Use .new-thing instead&#39;)</p></td><td data-label="type"><code>String</code></td><td data-label="default">&mdash;<span class="visually-hidden">none</span></td></tr></tbody></table><h3 class="item__sub-heading">Requires</h3><ul class="list-unstyled"><li class="item__description item__description--inline"><span class="item__cross-type">[variable]</span> <a href="#variable-app-version"><code>app-version</code></a></li><li class="item__description item__description--inline"><span class="item__cross-type">[variable]</span> <a href="#variable-deprecate-mode"><code>deprecate-mode</code></a></li></ul></section></section></section><footer class="footer" role="contentinfo"><div class="container"><div class="footer__project-info project-info"><!-- Name and URL --><a class="project-info__name" href="https://github.com/salesforce-ux/sass-deprecate">Sass Deprecate</a><!-- Version --><!-- License --></div><a class="footer__watermark" href="http://sassdoc.com"><img src="assets/images/logo_light_inline.svg" alt="SassDoc Logo"></a></div></footer></article><script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script><script src="assets/js/main.min.js"></script></body></html>
