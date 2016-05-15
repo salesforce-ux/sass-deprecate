@@ -10,8 +10,8 @@
 @import '../index';
 
 .wrong-parameter-type {
-  $parameter-not-string: 0.0.1;
-  @include deprecate($parameter-not-string) {
+  $not-a-string: 0.0.1;
+  @include deprecate($not-a-string) {
     content: 'This should fail.';
   }
 }
