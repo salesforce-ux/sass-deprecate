@@ -26,7 +26,8 @@
     "test",
     "sassdoc",
     "**/.*",
-    "sassdoc.sh"
+    "sassdoc.sh",
+    "assets"
   ],
   "eyeglass": {
     "needs": "^0.8.2",

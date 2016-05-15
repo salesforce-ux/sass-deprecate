@@ -1,10 +1,13 @@
 # Deprecate with confidence [![Build Status](https://travis-ci.org/salesforce-ux/sass-deprecate.svg?branch=master)](https://travis-ci.org/salesforce-ux/sass-deprecate)
 
+![ ](https://raw.github.com/salesforce-ux/sass-deprecate/master/assets/logo.svg)
+
 `deprecate()` is a Sass mixin that helps managing code deprecation.
 
 How? Sass Deprecate warns about the pieces of your codebase that are deprecated, instructing developers where to clean up. It helps provide a clear upgrade path for framework and library users.
 
-We (the Salesforce UX team) built this tool to help us deprecate code with confidence in the [Lightning Design System](https://www.lightningdesignsystem.com).
+We (the Salesforce UX team) built this tool to help us [deprecate](https://en.wikipedia.org/wiki/Deprecation#Software_deprecation) code with confidence in the [Lightning Design System](https://www.lightningdesignsystem.com).
+
 
 ## Getting started
 
@@ -23,7 +26,7 @@ $app-version: '1.0.0';
 
 ### v1.1.0
 
-We're introducing a new type of button, but we want to keep the old one in for backwards compatibility.
+We're introducing a new type of button, but we want to keep the old one in the code for backwards compatibility.
 
 ```scss
 $app-version: '1.1.0';
