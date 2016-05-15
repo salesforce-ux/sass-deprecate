@@ -47,7 +47,7 @@ describe "Compiling files containing deprecated code" do
 end
 
 describe "Signaling deprecated code for a future patch" do
-  it "output the code" do
+  it "should output the code" do
     find ".deprecate-in-next-patch{content"
   end
   it "should not throw any warnings" do
@@ -56,7 +56,7 @@ describe "Signaling deprecated code for a future patch" do
 end
 
 describe "Signaling deprecated code for a future major version" do
-  it "output the code" do
+  it "should output the code" do
     find ".deprecate-in-next-minor-version{content"
   end
   it "should not throw any warnings" do
@@ -65,7 +65,7 @@ describe "Signaling deprecated code for a future major version" do
 end
 
 describe "Signaling deprecated code for a future major version" do
-  it "output the code" do
+  it "should output the code" do
     find ".deprecate-in-next-major-version{content"
   end
   it "should not throw any warnings" do
