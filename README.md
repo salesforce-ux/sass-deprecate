@@ -1,6 +1,4 @@
-# Deprecate with confidence [![Build Status](https://travis-ci.org/salesforce-ux/sass-deprecate.svg?branch=master)](https://travis-ci.org/salesforce-ux/sass-deprecate)
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/salesforce-ux/sass-deprecate.svg)](https://greenkeeper.io/)
+# Deprecate with confidence [![Build Status](https://travis-ci.org/salesforce-ux/sass-deprecate.svg?branch=master)](https://travis-ci.org/salesforce-ux/sass-deprecate) [![Greenkeeper badge](https://badges.greenkeeper.io/salesforce-ux/sass-deprecate.svg)](https://greenkeeper.io/)
 
 <img alt="" src="https://cdn.rawgit.com/salesforce-ux/sass-deprecate/master/assets/logo.png" width="200" />
 
