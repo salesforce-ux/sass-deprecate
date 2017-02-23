@@ -6,7 +6,7 @@
     "sass",
     "eyeglass-module"
   ],
-  "license": "SEE LICENSE IN README.md",
+  "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
     "url": "git@github.com:salesforce-ux/sass-deprecate.git"
@@ -19,7 +19,8 @@
   },
   "files": [
     "index.scss",
-    "README.md"
+    "README.md",
+    "LICENSE.txt"
   ],
   "main": "index.scss",
   "ignore": [
