@@ -109,6 +109,11 @@ Generate & deploy the documentation to <https://salesforce-ux.github.io/sass-dep
 
     npm run deploy-doc
 
+## Mentioned in
+
+- [Taking Pattern Libraries To The Next Level](https://www.smashingmagazine.com/taking-pattern-libraries-next-level/), by Vitaly Friedman on Smashing Magazine
+- [Atomic Design](http://atomicdesign.bradfrost.com/chapter-5/), a book by Brad Frost
+
 ## Acknowledgments
 
 Thanks to [Hugo Giraudel](https://github.com/HugoGiraudel) for his `to-number` Sass function.
