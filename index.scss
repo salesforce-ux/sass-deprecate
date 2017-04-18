@@ -93,10 +93,6 @@ $deprecate-mode: 'sensible' !default;
 /// @param {String} $version - SemVer-like version (e.g. '2.0.0')
 /// @param {String} $message - Reason about why the code will be deprecated or possible workaround (e.g. 'Use .new-thing instead')
 @mixin deprecate($version, $message: null) {
-  @if (type-of($version) != 'string') {
-    @error 'The parameter passed to deprecate() must be a String. Good: deprecate(\'0.1.0\') / Bad: deprecate(0.1.0).';
-  }
-
   // Plugin is disabled. Output anyway.
   @if ('disabled' == $deprecate-mode) {
     @content;
