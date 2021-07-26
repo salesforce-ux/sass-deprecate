@@ -76,11 +76,11 @@ Need to compare version numbers such as `3.2.1-beta.5` and `1.2.3-alpha.2`?
 
 By default, sass-deprecate only compares `$version` with `$app-version` in the form of `Major.Minor.Patch` (e.g. `1.2.3` with `2.0.0`).
 
-For advanced SemVer support in the form of `Major.Minor.Patch-beta/alpha/rc.1`, define a `deprecate-version-greater-than($v1, $v2)` function, or rely on Hugo's [sass-semver](https://www.github.com/HugoGiraudel/sass-semver):
+For advanced SemVer support in the form of `Major.Minor.Patch-beta/alpha/rc.1`, define a `deprecate-version-greater-than($v1, $v2)` function, or rely on Kitty's [sass-semver](https://github.com/KittyGiraudel/sass-semver):
 
 ```scss
 // Override the default SemVer resolution engine
-// with sass-semver: https://github.com/HugoGiraudel/sass-semver
+// with sass-semver: https://github.com/KittyGiraudel/sass-semver
 @import 'node_modules/sass-semver/index';
 
 @function deprecate-version-greater-than($version, $app-version) {
@@ -116,4 +116,4 @@ Generate & deploy the documentation to <https://salesforce-ux.github.io/sass-dep
 
 ## Acknowledgments
 
-Thanks to [Hugo Giraudel](https://github.com/HugoGiraudel) for his `to-number` Sass function.
+Thanks to [Kitty Giraudel](https://github.com/KittyGiraudel) for their `to-number` Sass function.
